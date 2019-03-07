@@ -7,12 +7,11 @@
 </head>
 
 <body>
-    <button id="reset">Reset</button>
+    <button id="reset" style="text-align:center;">Reset</button>
     <div id="container"></div>
 
     <script>
         setupGridTable(64);             //64 felt about right for the initial size through random testing
-
 
         // button controls
         let reset = document.querySelector("#reset");
@@ -26,7 +25,7 @@
             let myTable = document.getElementById("myTable");
             myTable.parentNode.removeChild(myTable);
 
-            let gridSize = prompt("Choose your grid size!\nFor example, entering 64 will make the original grid size of 64x64 cubes.")
+            let gridSize = prompt("Choose your grid size!\nFor example, entering 64 will make the original grid size of 64x64 cubes.", "64")
             if(Number.isInteger(parseInt(gridSize)))
                 setupGridTable(gridSize);
             else
@@ -39,6 +38,7 @@
         function setupGridTable(cellCount) {
             let gridTable = document.createElement("TABLE");
             gridTable.setAttribute("id", "myTable");
+            gridTable.setAttribute("class", "center");
 
             let k;
             for (let i = 0; i < cellCount; i++) {
@@ -47,6 +47,9 @@
                 while (k < cellCount) {
                     let cell = row.insertCell(k);
                     cell.setAttribute("id", "cell")
+                    let cellSize = 960 / cellCount;
+                    cell.setAttribute("height", cellSize);
+                    cell.setAttribute("width", cellSize);
 
                     cell.addEventListener("mouseover", () => {
                         cell.setAttribute("class", "cellBackground");
