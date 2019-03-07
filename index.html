@@ -7,14 +7,28 @@
 </head>
 
 <body>
+    <button id="reset">Reset</button>
     <div id="container"></div>
 
     <script>
+        //button controls
+        let reset = document.querySelector("#reset");
+        //clear color from grid by removing class cellBackground
+        reset.addEventListener("click", () => {
+            let removeCellColor = document.querySelectorAll("#cell");
+            removeCellColor.forEach((cell) => {
+                cell.setAttribute("class", "");
+            });
+        });
+
+
+
+        //grid table setup
         let gridTable = document.createElement("TABLE");
         gridTable.setAttribute("id", "myTable");
 
         let k;
-        const cellCount = 16 * 4;
+        const cellCount = 64; //64 felt about right for the initial size through random testing
         for (let i = 0; i < cellCount; i++) {
             k = 0;
             let row = gridTable.insertRow(i);
@@ -29,6 +43,7 @@
                 k++;
             }
         }
+
         let container = document.querySelector("#container");
         container.appendChild(gridTable);
 
