@@ -1,0 +1,12 @@
+.cellBackground {
+    background-color: mediumaquamarine;
+    padding: 0px;
+    margin: 0px;
+}
+
+#cell {
+    /*border-style: dashed;
+    */
+    width: 10px;
+    height: 10px;
+}
