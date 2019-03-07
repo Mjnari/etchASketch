@@ -11,42 +11,53 @@
     <div id="container"></div>
 
     <script>
-        //button controls
+        setupGridTable(64);             //64 felt about right for the initial size through random testing
+
+
+        // button controls
         let reset = document.querySelector("#reset");
-        //clear color from grid by removing class cellBackground
+        // clear color from grid by removing class cellBackground
         reset.addEventListener("click", () => {
-            let removeCellColor = document.querySelectorAll("#cell");
-            removeCellColor.forEach((cell) => {
+            let cells = document.querySelectorAll("#cell");
+            cells.forEach((cell) => {
                 cell.setAttribute("class", "");
             });
+
+            let myTable = document.getElementById("myTable");
+            myTable.parentNode.removeChild(myTable);
+
+            let gridSize = prompt("Choose your grid size!\nFor example, entering 64 will make the original grid size of 64x64 cubes.")
+            if(Number.isInteger(parseInt(gridSize)))
+                setupGridTable(gridSize);
+            else
+                setupGridTable(64); // if user does not enter an int, go to defualt
         });
 
 
 
-        //grid table setup
-        let gridTable = document.createElement("TABLE");
-        gridTable.setAttribute("id", "myTable");
+        // grid table setup
+        function setupGridTable(cellCount) {
+            let gridTable = document.createElement("TABLE");
+            gridTable.setAttribute("id", "myTable");
 
-        let k;
-        const cellCount = 64; //64 felt about right for the initial size through random testing
-        for (let i = 0; i < cellCount; i++) {
-            k = 0;
-            let row = gridTable.insertRow(i);
-            while (k < cellCount) {
-                let cell = row.insertCell(k);
-                cell.setAttribute("id", "cell")
+            let k;
+            for (let i = 0; i < cellCount; i++) {
+                k = 0;
+                let row = gridTable.insertRow(i);
+                while (k < cellCount) {
+                    let cell = row.insertCell(k);
+                    cell.setAttribute("id", "cell")
 
-                cell.addEventListener("mouseover", () => {
-                    cell.setAttribute("class", "cellBackground");
-                });
+                    cell.addEventListener("mouseover", () => {
+                        cell.setAttribute("class", "cellBackground");
+                    });
 
-                k++;
+                    k++;
+                }
             }
+            let container = document.querySelector("#container");
+            container.appendChild(gridTable);
         }
-
-        let container = document.querySelector("#container");
-        container.appendChild(gridTable);
-
     </script>
 </body>
 
